@@ -1,23 +1,9 @@
+// @flow
+
 import React from 'react'
 import Element from "./Element";
 import PropTypes from "prop-types";
-import {cc, oneOfConstants} from 'utils';
-
-/**
- *
- * @param props
- * @returns {*}
- * @constructor
- */
-const Success = (props) => <Button {...Button.Presets.SUCCESS} {...props}/>;
-
-/**
- *
- * @param props
- * @returns {*}
- * @constructor
- */
-const Error = (props) => <Button {...Button.Presets.ERROR} {...props}/>;
+import {cc, oneOfConstants} from '../utils';
 
 /**
  * User: N <n@sovrin.de>
@@ -25,6 +11,10 @@ const Error = (props) => <Button {...Button.Presets.ERROR} {...props}/>;
  * Time: 20:46
  */
 export default class Button extends Element {
+
+    static Success = (props: any) => <Button {...Button.Presets.SUCCESS} {...props}/>;
+
+    static Error = (props: any) => <Button {...Button.Presets.ERROR} {...props}/>;
 
     static Size = {
         LARGE: 'lg',
@@ -53,10 +43,6 @@ export default class Button extends Element {
         size: oneOfConstants(Button.Size),
         success: PropTypes.bool,
     };
-
-    static Success = Success;
-
-    static Error = Error;
 
     /**
      *

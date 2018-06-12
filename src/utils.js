@@ -40,6 +40,11 @@ const cc = (...cls) => (
         .trim()
 );
 
+/**
+ *
+ * @param keys
+ * @returns {shim}
+ */
 const oneOfConstants = (keys) => (
     PropTypes.oneOf(
         Object.keys(keys).map(key => keys[key])

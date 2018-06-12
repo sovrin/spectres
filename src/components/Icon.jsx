@@ -1,7 +1,9 @@
+// @flow
+
 import React from 'react'
 import Element from "./Element";
 import PropTypes from "prop-types";
-import {cc, oneOfConstants} from 'utils';
+import {cc, oneOfConstants} from '../utils';
 
 /**
  * User: N <n@sovrin.de>
@@ -98,7 +100,7 @@ export default class Icon extends Element {
         }
 
         className = cc('icon',
-            [type, place, size].map((prop) => `icon-${prop}`),
+            [place, size].map(p => `icon-${p}`),
             {
                 'form-icon': (form),
                 loading,

@@ -5,7 +5,7 @@ import '@storybook/addon-options/register';
 
 import {text, boolean, number, select as _select} from '@storybook/addon-knobs/react';
 
-const select = (name, options, def= null) => (
+const select = (name, options, def = null) => (
     _select(
         name,
         Object.keys(options).map(key => options[key]),
@@ -14,5 +14,5 @@ const select = (name, options, def= null) => (
 );
 
 export {
-    select
+    select, boolean, text, number
 };

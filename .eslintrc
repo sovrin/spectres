@@ -29,6 +29,7 @@
             0
         ],
         "react/no-children-prop": "off",
+        "react/display-name": "off",
         "strict": 0,
         "indent": [
             "warn",

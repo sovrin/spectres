@@ -3,6 +3,8 @@ import {configure, addDecorator} from '@storybook/react';
 import {setOptions} from '@storybook/addon-options';
 import {withKnobs} from '@storybook/addon-knobs/react';
 
+require('spectre.css');
+
 // automatically import all files ending in *.stories.js
 const req = require.context('../stories', true, /.stories.js$/);
 
