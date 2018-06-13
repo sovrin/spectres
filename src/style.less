@@ -1,0 +1,103 @@
+@import (reference) "variables";
+
+.toasts {
+    display: flex;
+    flex-direction: column;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    padding: @unit-4;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: @zindex-4;
+    pointer-events: none;
+
+    > .toast {
+        margin-bottom: @unit-3;
+        pointer-events: auto;
+
+        width: @unit-10 * 10;
+    }
+}
+
+.toast {
+    position: relative;
+    animation-name: fade-in, slide-up;
+    animation-duration: @animation-duration;
+    animation-timing-function: @animation-function;
+    animation-fill-mode: forwards;
+
+    &.closing {
+        animation-name: fade-out, slide-down;
+    }
+
+    &.timed {
+        padding-bottom: @unit-3;
+
+        &:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: @unit-1;
+            width: 0;
+            background: fade(@light-color, 33%);
+            animation-name: timer;
+            animation-duration: 10s;
+            animation-timing-function: linear;
+            animation-fill-mode: forwards;
+        }
+
+        &:hover {
+            &:after {
+                animation-play-state: paused;
+            }
+        }
+    }
+
+    @keyframes timer {
+        0% {
+            width: 0;
+        }
+        100% {
+            width: 100%;
+        }
+    }
+
+    @keyframes fade-in {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes fade-out {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+
+    @keyframes slide-down {
+        0% {
+            transform: translateY(-25px);
+        }
+        100% {
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slide-up {
+        0% {
+            transform: translateY(0);
+        }
+        100% {
+            transform: translateY(25px);
+        }
+    }
+}

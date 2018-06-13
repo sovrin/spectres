@@ -4,6 +4,7 @@ import {setOptions} from '@storybook/addon-options';
 import {withKnobs} from '@storybook/addon-knobs/react';
 
 require('spectre.css');
+require('../src/style.less');
 
 // automatically import all files ending in *.stories.js
 const req = require.context('../stories', true, /.stories.js$/);
@@ -13,7 +14,6 @@ const loadStories = () => (
 );
 
 const style = {
-    textAlign: 'center',
     margin: '50px 25px',
     background: '#FCFCFC',
     padding: '25px 10px',

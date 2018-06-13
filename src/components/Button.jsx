@@ -42,6 +42,11 @@ export default class Button extends Element {
         primary: PropTypes.bool,
         size: oneOfConstants(Button.Size),
         success: PropTypes.bool,
+        clear: PropTypes.bool,
+        float: PropTypes.shape({
+            right: PropTypes.bool,
+            left: PropTypes.bool,
+        })
     };
 
     /**
@@ -64,6 +69,8 @@ export default class Button extends Element {
             primary,
             size,
             success,
+            clear,
+            float,
             ..._left
         } = this.props;
 
@@ -79,6 +86,9 @@ export default class Button extends Element {
             ['btn-primary']: (primary),
             ['btn-' + size]: (size),
             ['btn-success']: (success),
+            ['btn-clear']: (clear),
+            'float-left': (float && float.left),
+            'float-right': (float && float.right),
         });
 
         return (
