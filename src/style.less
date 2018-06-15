@@ -2,7 +2,7 @@
 
 .toasts {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     bottom: 0;
     left: 0;
     overflow: hidden;
@@ -14,29 +14,27 @@
     pointer-events: none;
 
     > .toast {
+        align-self: flex-end;
         margin-bottom: @unit-3;
         pointer-events: auto;
-
         width: @unit-10 * 10;
     }
 }
 
 .toast {
     position: relative;
-    animation-name: fade-in, slide-up;
+    //animation-name: fade-in, slide-up;
     animation-duration: @animation-duration;
     animation-timing-function: @animation-function;
-    animation-fill-mode: forwards;
 
     &.closing {
-        animation-name: fade-out, slide-down;
+        //animation-name: fade-out, slide-down;
     }
 
     &.timed {
         padding-bottom: @unit-3;
 
-        &:after {
-            content: "";
+        > .timer {
             position: absolute;
             left: 0;
             bottom: 0;
@@ -44,13 +42,12 @@
             width: 0;
             background: fade(@light-color, 33%);
             animation-name: timer;
-            animation-duration: 10s;
+            animation-duration: 3s;
             animation-timing-function: linear;
-            animation-fill-mode: forwards;
         }
 
         &:hover {
-            &:after {
+            > .timer {
                 animation-play-state: paused;
             }
         }
@@ -85,19 +82,19 @@
 
     @keyframes slide-down {
         0% {
-            transform: translateY(-25px);
+            transform: translateY(0);
         }
         100% {
-            transform: translateY(0);
+            transform: translateY(25px);
         }
     }
 
     @keyframes slide-up {
         0% {
-            transform: translateY(0);
+            transform: translateY(-25px);
         }
         100% {
-            transform: translateY(25px);
+            transform: translateY(0);
         }
     }
 }

@@ -7,7 +7,7 @@ import React from 'react';
  * Date: 15.03.2018
  * Time: 21:16
  */
-export default class Element extends React.Component<any> {
+export default class Element extends React.Component<any, any> {
 
     /**
      *

@@ -1,18 +1,15 @@
 // @flow
 
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import {cc, oneOfConstants} from '../utils';
-import Toast from '../components/Toast';
-
-const INIT_SYMBOL = Symbol('init');
 
 /**
  * User: N <n@sovrin.de>
  * Date: 12.06.2018
  * Time: 21:39
  */
-export default class Toasts extends React.Component {
+export default class Toasts extends React.Component<any, any> {
 
     static Vertical = {
         TOP: 'top',
@@ -28,10 +25,9 @@ export default class Toasts extends React.Component {
 
     static propTypes = {
         manager: PropTypes.shape({
-            _context: null,
-            [INIT_SYMBOL]: PropTypes.func,
-            show: PropTypes.func,
-            hide: PropTypes.func
+            _context: PropTypes.instanceOf(Toasts),
+            _init: PropTypes.func,
+            dispatch: PropTypes.func
         }),
         vertical: oneOfConstants(Toasts.Vertical),
         horizontal: oneOfConstants(Toasts.Horizontal),
@@ -42,22 +38,26 @@ export default class Toasts extends React.Component {
         horizontal: Toasts.Horizontal.RIGHT,
     };
 
-
+    /**
+     *
+     * @return {*}
+     */
     static getManager() {
         return {
             _context: null,
-            [INIT_SYMBOL](context) {
+            _init(context: Toasts) {
                 this._context = context;
             },
-            show(toast: Toast, props: ?any, cb: ?(any) => void) {
-                const {props: {onOpen, horizontal}, state: {toasts}, ids} = this._context;
-                const nextId = ids + 1;
+            dispatch(toast: Node, props: ?React.ElementProps, cb: ?(any) => void) {
+                const {props: {onOpen, horizontal}, state: {toasts}} = this._context;
+                const id = `toast-${Date.now()}${Math.random()}`;
 
                 const element = React.cloneElement(toast, {
-                    onClose: () => this._context.remove('#toast_' + nextId),
-                    id: '#toast_' + nextId,
+                    key: id,
+                    id,
                     props,
-                    alignment: horizontal
+                    alignment: horizontal,
+                    onClose: () => this._context.remove(id),
                 });
 
                 toasts.push(element);
@@ -66,15 +66,9 @@ export default class Toasts extends React.Component {
                 cb && cb();
 
                 this._context.setState({toasts});
-                this._context.ids = nextId;
-            },
-            hide(id) {
-                this._context.remove('#toast_' + id);
             },
         };
     }
-
-    ids = 0;
 
     state = {
         toasts: [],
@@ -88,14 +82,14 @@ export default class Toasts extends React.Component {
     componentDidMount() {
         const {manager} = this.props;
 
-        manager[INIT_SYMBOL](this);
+        manager._init(this);
     }
 
     /**
      *
      * @param id
      */
-    remove(id) {
+    remove(id: string) {
         const {toasts} = this.state;
 
         this.setState({

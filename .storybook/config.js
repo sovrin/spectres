@@ -4,6 +4,7 @@ import {setOptions} from '@storybook/addon-options';
 import {withKnobs} from '@storybook/addon-knobs/react';
 
 require('spectre.css');
+require('spectre.css/dist/spectre-icons.min.css');
 require('../src/style.less');
 
 // automatically import all files ending in *.stories.js
@@ -24,4 +25,4 @@ const style = {
 addDecorator(story => <div style={style}>{story()}</div>);
 addDecorator(withKnobs);
 configure(loadStories, module);
-// setOptions({downPanelInRight: true});
+setOptions({addonPanelInRight : true});

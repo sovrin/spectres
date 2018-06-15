@@ -34,7 +34,7 @@ const cc = (...cls) => (
         .filter(c => c)
         .map(c => switchcase({
             [Array]: () => cc(...c),
-            [Object]: () => Object.keys(c).filter(i => c[i]).join(' ')
+            [Object]: () => Object.keys(c).filter(i => c[i]).join(' '),
         }, c.constructor, c))
         .join(' ')
         .trim()
@@ -47,7 +47,7 @@ const cc = (...cls) => (
  */
 const oneOfConstants = (keys) => (
     PropTypes.oneOf(
-        Object.keys(keys).map(key => keys[key])
+        Object.keys(keys).map(key => keys[key]),
     )
 );
 
@@ -65,5 +65,5 @@ module.exports = {
     cc,
     includes,
     switchcase,
-    oneOfConstants
+    oneOfConstants,
 };
